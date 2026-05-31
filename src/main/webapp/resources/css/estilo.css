@@ -1,0 +1,267 @@
+/* ============================================================================
+   TRANSPORTESAQP - Hoja de estilos (tema formal/elegante)
+   Complementa a Bootstrap 5.3. Define paleta, tipografia, animaciones
+   y transiciones reutilizables en todas las vistas.
+   ============================================================================ */
+
+:root {
+    --azul-profundo: #0d1b2a;
+    --azul: #1b263b;
+    --azul-medio: #2c3e5c;
+    --azul-acero: #415a77;
+    --dorado: #c9a227;
+    --dorado-claro: #e3c565;
+    --gris-fondo: #eef2f7;
+    --texto: #1b263b;
+    --sombra-suave: 0 10px 30px rgba(13, 27, 42, 0.12);
+    --sombra-fuerte: 0 18px 45px rgba(13, 27, 42, 0.25);
+    --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ---------- Base ---------- */
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    color: var(--texto);
+    background: var(--gris-fondo);
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Fondo degradado elegante para pantallas tipo "hero" (login / inicio) */
+.fondo-hero {
+    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-acero) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.fondo-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(201, 162, 39, 0.18), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(65, 90, 119, 0.35), transparent 45%);
+    pointer-events: none;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-custom {
+    background: rgba(13, 27, 42, 0.92) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border-bottom: 2px solid var(--dorado);
+}
+.navbar-custom .navbar-brand {
+    color: #fff !important;
+}
+.navbar-custom .navbar-brand .bi {
+    color: var(--dorado);
+}
+.navbar-custom .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    position: relative;
+    transition: var(--transicion);
+    margin: 0 4px;
+}
+.navbar-custom .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 4px;
+    height: 2px;
+    background: var(--dorado);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.navbar-custom .nav-link:hover {
+    color: #fff !important;
+}
+.navbar-custom .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicion);
+    overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra-fuerte);
+}
+.card-header-custom {
+    background: linear-gradient(90deg, var(--azul-profundo) 0%, var(--azul-acero) 100%);
+    color: #fff;
+    border-bottom: 3px solid var(--dorado);
+    padding: 1.1rem 1.4rem;
+}
+
+/* Tarjetas del dashboard (menu) */
+.modulo-card .icono {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-acero) 100%);
+    transition: var(--transicion);
+}
+.modulo-card:hover .icono {
+    transform: scale(1.12) rotate(-6deg);
+    background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-claro) 100%);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 27, 42, 0.2);
+}
+.btn:active {
+    transform: translateY(0);
+}
+.btn-dorado {
+    background: linear-gradient(90deg, var(--dorado) 0%, var(--dorado-claro) 100%);
+    border: none;
+    color: var(--azul-profundo);
+    font-weight: 600;
+}
+.btn-dorado:hover {
+    color: var(--azul-profundo);
+    filter: brightness(1.05);
+}
+.btn-azul {
+    background: linear-gradient(90deg, var(--azul-profundo) 0%, var(--azul-acero) 100%);
+    border: none;
+    color: #fff;
+}
+.btn-azul:hover {
+    color: #fff;
+}
+
+/* ---------- Tablas ---------- */
+.table {
+    margin-bottom: 0;
+}
+.table thead th {
+    background: var(--azul-profundo);
+    color: #fff;
+    font-weight: 500;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+.table tbody tr {
+    transition: var(--transicion);
+}
+.table tbody tr:hover {
+    background-color: rgba(201, 162, 39, 0.08);
+    transform: scale(1.005);
+}
+
+/* ---------- Formularios ---------- */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1.5px solid #d8dee9;
+    padding: 0.65rem 0.9rem;
+    transition: var(--transicion);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 0.2rem rgba(201, 162, 39, 0.2);
+}
+.form-label {
+    font-weight: 500;
+    color: var(--azul);
+    margin-bottom: 0.35rem;
+}
+
+/* ---------- Login ---------- */
+.login-container {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: var(--sombra-fuerte);
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 2;
+}
+.login-logo {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 38px;
+    color: var(--azul-profundo);
+    background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-claro) 100%);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.4);
+    animation: flotar 3s ease-in-out infinite;
+}
+
+/* ---------- Footer ---------- */
+.footer-custom {
+    background: var(--azul-profundo);
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 2px solid var(--dorado);
+}
+
+/* ============================================================================
+   ANIMACIONES Y TRANSICIONES
+   ============================================================================ */
+@keyframes aparecerArriba {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes aparecer {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes escalarEntrada {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+.anim-subir   { animation: aparecerArriba 0.6s ease both; }
+.anim-aparecer{ animation: aparecer 0.8s ease both; }
+.anim-escala  { animation: escalarEntrada 0.5s ease both; }
+
+/* Retrasos escalonados para listas/tarjetas */
+.delay-1 { animation-delay: 0.10s; }
+.delay-2 { animation-delay: 0.22s; }
+.delay-3 { animation-delay: 0.34s; }
+.delay-4 { animation-delay: 0.46s; }
+
+/* Respeta a usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

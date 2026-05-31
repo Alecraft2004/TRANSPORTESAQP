@@ -1,0 +1,62 @@
+# ============================================================
+#  TRANSPORTESAQP - .gitignore
+# ============================================================
+
+# ---------- Claude / asistentes de IA (no subir nada de esto) ----------
+.claude/
+.cursor/
+.aider*
+CLAUDE.md
+.clauderc
+
+# ---------- Maven (artefactos de compilacion) ----------
+target/
+**/target/
+*.war
+*.jar
+*.ear
+!.mvn/wrapper/maven-wrapper.jar
+
+# ---------- NetBeans (proyecto legacy de escritorio) ----------
+build/
+**/build/
+dist/
+**/dist/
+nbproject/private/
+**/nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# ---------- Visual Studio Code ----------
+.vscode/
+*.code-workspace
+
+# ---------- Otros IDE ----------
+.idea/
+*.iml
+*.ipr
+*.iws
+.metals/
+.bloop/
+.settings/
+.project
+.classpath
+
+# ---------- Servidores / despliegue ----------
+.rsp/
+*.log
+logs/
+
+# ---------- Archivos del sistema operativo ----------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+
+# ---------- Temporales ----------
+*.tmp
+*.bak
+*.swp
+*~

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  <ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Menú Principal - TRANSPORTESAQP</ui:define>
+
+    <ui:define name="content">
+      <div class="p-4 mb-4 rounded-4 text-white anim-subir"
+           style="background: linear-gradient(90deg, var(--azul-profundo) 0%, var(--azul-acero) 100%); border-left: 5px solid var(--dorado);">
+        <h2 class="mb-1"><i class="bi bi-person-circle"></i> Bienvenido, #{loginBean.usuarioAutenticado.usuario}</h2>
+        <p class="mb-0" style="color: rgba(255,255,255,0.8);">Selecciona un módulo para comenzar a gestionar tu negocio.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Módulo Clientes -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card modulo-card h-100 text-center anim-subir delay-1">
+            <div class="card-body p-4">
+              <div class="icono"><i class="bi bi-people-fill"></i></div>
+              <h5 class="card-title">Gestionar Clientes</h5>
+              <p class="card-text text-muted small">Agregar, editar y eliminar clientes</p>
+              <h:form>
+                <h:commandLink action="clientes.xhtml" styleClass="btn btn-azul w-100">
+                  <i class="bi bi-arrow-right-circle"></i> Ingresar
+                </h:commandLink>
+              </h:form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo Vehículos -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card modulo-card h-100 text-center anim-subir delay-2">
+            <div class="card-body p-4">
+              <div class="icono"><i class="bi bi-car-front-fill"></i></div>
+              <h5 class="card-title">Gestionar Vehículos</h5>
+              <p class="card-text text-muted small">Administrar vehículos disponibles</p>
+              <span class="btn btn-secondary w-100 disabled">Próximamente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo Técnicos -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card modulo-card h-100 text-center anim-subir delay-3">
+            <div class="card-body p-4">
+              <div class="icono"><i class="bi bi-tools"></i></div>
+              <h5 class="card-title">Gestionar Técnicos</h5>
+              <p class="card-text text-muted small">Registrar técnicos especializados</p>
+              <span class="btn btn-secondary w-100 disabled">Próximamente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo Planes -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card modulo-card h-100 text-center anim-subir delay-4">
+            <div class="card-body p-4">
+              <div class="icono"><i class="bi bi-clipboard2-check-fill"></i></div>
+              <h5 class="card-title">Planes Mantenimiento</h5>
+              <p class="card-text text-muted small">Gestionar planes de mantenimiento</p>
+              <span class="btn btn-secondary w-100 disabled">Próximamente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ui:define>
+  </ui:composition>
+</html>

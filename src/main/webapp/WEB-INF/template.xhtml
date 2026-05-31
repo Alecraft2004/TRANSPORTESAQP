@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        <ui:insert name="title">TRANSPORTESAQP</ui:insert>
+    </title>
+    <!-- Bootstrap CSS + Iconos -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Tipografia profesional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Poppins:wght@500;600;700&amp;display=swap" />
+    <!-- Estilos propios (tema elegante + animaciones) -->
+    <h:outputStylesheet name="css/estilo.css" />
+</h:head>
+
+<h:body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="menu.xhtml">
+                <i class="bi bi-truck-front-fill"></i> TRANSPORTESAQP
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.xhtml"><i class="bi bi-house-door"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.xhtml"><i class="bi bi-people"></i> Clientes</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-grid"></i> Más opciones
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
+                            <li><span class="dropdown-item disabled"><i class="bi bi-car-front"></i> Vehículos (próximamente)</span></li>
+                            <li><span class="dropdown-item disabled"><i class="bi bi-tools"></i> Técnicos (próximamente)</span></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><h:form style="margin: 0;"><h:commandLink styleClass="dropdown-item text-danger"
+                                action="#{loginBean.logout}"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</h:commandLink></h:form></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4 anim-subir">
+        <ui:insert name="content">
+            <!-- El contenido específico de cada página irá aquí -->
+        </ui:insert>
+    </div>
+
+    <footer class="footer-custom text-center py-4 mt-5">
+        <p class="mb-0"><i class="bi bi-truck-front-fill"></i> &copy; 2026 TRANSPORTESAQP — Sistema de Gestión de Transportes</p>
+        <p class="mb-0 small">Arquitectura MVC · DAO · DTO — JSF + Bootstrap</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</h:body>
+
+</html>

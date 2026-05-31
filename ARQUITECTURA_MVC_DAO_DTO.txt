@@ -1,0 +1,212 @@
+================================================================================
+PROYECTO TRANSPORTESAQP v2.0 - ARQUITECTURA MVC-DAO-DTO
+================================================================================
+
+📋 DESCRIPCIÓN GENERAL
+
+Este es el proyecto TRANSPORTESAQP mejorado con una arquitectura enterprise-grade
+que sigue el patrón MVC (Model-View-Controller) con capas DAO (Data Access Objects)
+y DTOs (Data Transfer Objects) claramente separadas.
+
+================================================================================
+🏗️ ESTRUCTURA DEL PROYECTO
+================================================================================
+
+├─ src/
+│  ├─ ConexionDB/
+│  │  └─ Conexion.java ........................ Gestión de conexiones PostgreSQL
+│  │                                        (Singleton con transacciones)
+│  │
+│  ├─ DTO/
+│  │  ├─ UsuarioDTO.java
+│  │  ├─ ClienteDTO.java
+│  │  ├─ VehiculoDTO.java
+│  │  ├─ TecnicoDTO.java
+│  │  └─ PlanMantenimientoDTO.java ........... Objetos para transferencia de datos
+│  │
+│  ├─ DAO/
+│  │  ├─ IGenericDAO.java ..................  Interfaz base para operaciones CRUD
+│  │  ├─ UsuarioDAO.java
+│  │  ├─ ClienteDAO.java
+│  │  ├─ VehiculoDAO.java
+│  │  ├─ TecnicoDAO.java
+│  │  └─ PlanMantenimientoDAO.java ......... Acceso a datos con JDBC
+│  │
+│  ├─ Controladores/
+│  │  ├─ ControladorUsuario.java
+│  │  ├─ ControladorCliente.java
+│  │  ├─ ControladorVehiculo.java
+│  │  ├─ ControladorTecnico.java
+│  │  └─ ControladorPlanMantenimiento.java . Lógica de negocio
+│  │
+│  ├─ ManagedBeans/
+│  │  ├─ LoginBean.java ..................... Autenticación
+│  │  └─ ClienteBean.java ................... Gestión de clientes
+│  │
+│  └─ Modelo/ ................................ Clases originales (se mantienen)
+│     (Usuario, Cliente, Vehículo, Tecnico, PlanMantenimiento)
+│
+├─ web/
+│  ├─ index.xhtml ............................ Página de inicio
+│  ├─ login.xhtml ............................ Página de login
+│  ├─ menu.xhtml ............................. Menú principal
+│  ├─ clientes.xhtml ......................... Listado de clientes
+│  ├─ formulario-cliente.xhtml ............... Formulario de clientes
+│  └─ WEB-INF/
+│     ├─ web.xml ............................ Configuración de JSF
+│     └─ template.xhtml ..................... Template maestro con Bootstrap
+│
+└─ [Resto de carpetas del proyecto original]
+
+================================================================================
+🔑 CONCEPTOS CLAVE
+================================================================================
+
+1. DTOs (Data Transfer Objects)
+   - Objetos simples sin lógica de negocio
+   - Utilizados únicamente para transferir datos entre capas
+   - Serializables para casos de sesión
+   - Ubicación: src/DTO/
+
+2. DAOs (Data Access Objects)
+   - Encapsulan toda la lógica de acceso a datos
+   - Implementan la interfaz IGenericDAO<T>
+   - Manejan transacciones con commit/rollback
+   - Utilizan JDBC para consultas SQL
+   - Ubicación: src/DAO/
+
+3. Controladores
+   - Actúan como intermediarios entre Vistas y DAOs
+   - Reciben DTOs del usuario
+   - Llaman a DAOs para operaciones
+   - Devuelven DTOs a las vistas
+   - Ubicación: src/Controladores/
+
+4. Conexión a Base de Datos
+   - Clase Singleton: Conexion.getInstance()
+   - Manejo automático de transacciones
+   - Métodos: conectar(), commit(), rollback(), desconectar()
+   - Ubicación: src/ConexionDB/
+
+5. JSF + Bootstrap
+   - Vistas en XHTML (sin scriptlets)
+   - Componentes JSF: h:form, h:inputText, h:dataTable, etc.
+   - Managed Beans con @ManagedBean
+   - Estilos Bootstrap 5.3.0
+   - Ubicación: web/
+
+================================================================================
+💻 USO DE LA ARQUITECTURA
+================================================================================
+
+FLUJO DE DATOS TÍPICO:
+
+Usuario (Vista) 
+    ↓
+Managed Bean (JSF)
+    ↓
+Controlador
+    ↓
+DAO
+    ↓
+Conexión (JDBC)
+    ↓
+PostgreSQL
+
+EJEMPLO: Obtener todos los clientes
+
+1. Usuario accede a clientes.xhtml
+2. ClienteBean.cargarClientes() es invocado
+3. ControladorCliente.obtenerTodosLosClientes()
+4. ClienteDAO.obtenerTodos()
+5. Ejecuta: SELECT * FROM cliente
+6. Retorna List<ClienteDTO>
+7. Muestra en h:dataTable
+
+================================================================================
+🔐 CARACTERÍSTICAS DE SEGURIDAD
+================================================================================
+
+✓ Transacciones JDBC robustas (commit/rollback)
+✓ Prepared Statements para prevenir SQL Injection
+✓ Validación de datos en DTOs
+✓ Autenticación en LoginBean
+✓ Gestión de sesiones en JSF
+
+================================================================================
+📊 TABLA DE CAMBIOS PRINCIPALES
+================================================================================
+
+Antigua Arquitectura          →    Nueva Arquitectura MVC-DAO-DTO
+
+Clases del Modelo             →    DTOs (objetos simples)
+DAOs en Modelo                →    DAOs separados en src/DAO/
+Controladores básicos         →    Controladores robustos
+Swing (Desktop)               →    JSF + Bootstrap (Web)
+Conexión sin manejo           →    Conexión Singleton con transacciones
+Vistas Swing (.form)          →    Vistas XHTML (sin scriptlets)
+
+================================================================================
+🚀 INSTRUCCIONES PARA EJECUTAR
+================================================================================
+
+PRERREQUISITOS:
+- Java JDK 8+
+- Apache Tomcat 8.5+
+- PostgreSQL 10+
+- Maven o Ant (configurado en build.xml)
+
+PASOS:
+
+1. Compilar el proyecto:
+   $ ant build
+
+2. Desplegar en Tomcat:
+   - Copiar WAR a CATALINA_HOME/webapps/
+   - O usar Maven: mvn clean install
+
+3. Acceder a la aplicación:
+   http://localhost:8080/TRANSPORTESAQP
+
+4. Login:
+   Usuario: admin (o el que hayas creado)
+   Contraseña: (la correspondiente en BD)
+
+================================================================================
+📝 PRÓXIMOS PASOS
+================================================================================
+
+1. Crear Managed Beans para Vehículos, Técnicos y Planes
+2. Crear XHTML correspondientes
+3. Agregar validaciones más robustas
+4. Implementar paginación en tablas
+5. Agregar reportes (JasperReports)
+6. Implementar seguridad adicional (Spring Security)
+
+================================================================================
+🤝 CONTRIBUCIONES Y MEJORAS
+================================================================================
+
+El código actual:
+✓ Sigue patrones enterprise
+✓ Es fácil de mantener y escalar
+✓ Separa claramente las responsabilidades
+✓ Usa JDBC con buenas prácticas
+✓ Tiene interfaces web limpias con Bootstrap
+
+Para agregar nuevas entidades:
+1. Crear DTO
+2. Crear DAO implementando IGenericDAO<T>
+3. Crear Controlador
+4. Crear Managed Bean
+5. Crear vista XHTML
+
+================================================================================
+📞 SOPORTE
+================================================================================
+
+Generado como parte del Avance de Proyecto Final 2 (APF2)
+Versión 2.0 - 2026
+Estado: En desarrollo
+
+================================================================================

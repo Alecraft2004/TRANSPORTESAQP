@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pe.edu.transportesaqp</groupId>
+    <artifactId>TRANSPORTESAQP</artifactId>
+    <version>2.0</version>
+    <packaging>war</packaging>
+
+    <name>TRANSPORTESAQP</name>
+    <description>Sistema de gestion de transportes - Web (JSF + Bootstrap) con arquitectura MVC-DAO-DTO</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Tomcat 9 provee el contenedor de Servlets/JSP, pero NO trae JSF;
+             por eso Mojarra y JSTL se empaquetan dentro del WAR.
+             Se usa JSF 2.2 (Mojarra 2.2.x) porque JSF 2.3 exige CDI, que Tomcat
+             puro no provee. Nuestros @ManagedBean son del estilo JSF 2.2. -->
+        <mojarra.version>2.2.20</mojarra.version>
+    </properties>
+
+    <dependencies>
+        <!-- API de Servlet/JSP: la provee Tomcat 9 (scope provided, no se empaqueta) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSF (Mojarra) - implementacion de Java Server Faces, namespace javax.faces -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>${mojarra.version}</version>
+        </dependency>
+
+        <!-- JSTL - etiquetas estandar para las vistas -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- Driver JDBC de PostgreSQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+
+        <!-- JAXB: provee javax.xml.bind.DatatypeConverter, que Mojarra 2.2 usa para
+             guardar el estado de la vista. Se elimino del JDK desde Java 11, por eso
+             hay que incluirlo manualmente al correr en Java 17/21. -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- El nombre final del WAR define la URL: http://localhost:8080/TRANSPORTESAQP -->
+        <finalName>TRANSPORTESAQP</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
